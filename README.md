@@ -1,142 +1,142 @@
 # CertFly
 
-> Duolingo para certificações técnicas — sessões diárias curtas, com repetição espaçada e domínio por tópico, para quem estuda certificações de dados nas 3 principais clouds (Google Cloud, AWS, Azure).
+> Duolingo for technical certifications — short daily sessions with spaced repetition and per-topic mastery, for anyone studying data certifications across the 3 major clouds (Google Cloud, AWS, Azure).
 
-![status](https://img.shields.io/badge/status-em%20desenvolvimento-yellow)
-![tipo](https://img.shields.io/badge/tipo-side%20project%20de%20estudo-blue)
+![status](https://img.shields.io/badge/status-in%20development-yellow)
+![type](https://img.shields.io/badge/type-study%20side%20project-blue)
 ![backend](https://img.shields.io/badge/backend-FastAPI-009688)
 ![frontend](https://img.shields.io/badge/frontend-Flutter-02569B)
 ![db](https://img.shields.io/badge/db-Supabase%20%2F%20Postgres-3ECF8E)
 
-Side project solo, não é um produto em produção nem tem plano de virar SaaS — é o jeito que encontrei de estudar certificações de dados com mais estrutura de hábito. O backend (motor de regras + API) está funcional e testado ponta a ponta contra SQLite local; falta conteúdo real (questões), conectar a um Supabase de verdade e o frontend Flutter.
+Solo side project, not a production product and not on a path to becoming a SaaS — it's how I found a way to study data certifications with more habit structure. The backend (rules engine + API) is functional and tested end to end against local SQLite; still missing: real content (questions), connecting a real Supabase project, and the Flutter frontend.
 
-**Sumário:** [Como é usar](#como-é-usar) · [Status atual](#status-atual-2026-08-09) · [Stack](#stack) · [Contexto](#contexto) · [Documentação](#documentação) · [Rodando localmente](#rodando-o-backend-localmente) · [Roadmap](#roadmap-imediato)
+**Summary:** [How it looks](#how-it-looks) · [Current status](#current-status-2026-08-09) · [Stack](#stack) · [Background](#background) · [Documentation](#documentation) · [Running locally](#running-the-backend-locally) · [Roadmap](#immediate-roadmap)
 
 ---
 
-## Como é usar
+## How it looks
 
 <table>
 <tr>
 <td width="50%" align="center">
-<img src="docs/screenshots/track-screen.png" alt="Trilha de tópicos do CertFly, com streak, XP e domínios bloqueados até o mastery liberar" width="100%" />
+<img src="docs/screenshots/track-screen.png" alt="CertFly topic track, with streak, XP, and domains locked until mastery unlocks them" width="100%" />
 </td>
 <td width="50%" align="center">
-<img src="docs/screenshots/profile-screen.png" alt="Tela de perfil do CertFly, com XP total, streak, certificação ativa e preferências de estudo" width="100%" />
+<img src="docs/screenshots/profile-screen.png" alt="CertFly profile screen, with total XP, streak, active certification, and study preferences" width="100%" />
 </td>
 </tr>
 <tr>
 <td valign="top">
 
-**Trilha da certificação.** Cada certificação vira uma trilha vertical de domínios e tópicos, no espírito do Duolingo pra idiomas. No topo, o streak do dia e o XP acumulado — o motor de hábito que sustenta a proposta do produto. Abaixo, os tópicos em sequência: o próximo já liberado com um "Começar", os seguintes bloqueados (🔒) até o motor de mastery confirmar 80% de domínio no tópico anterior — gate de desbloqueio validado no servidor, não só decorativo na tela.
+**Certification track.** Each certification becomes a vertical track of domains and topics, in the spirit of Duolingo for languages. At the top, the day's streak and accumulated XP — the habit engine that drives the product's core proposition. Below, topics in sequence: the next one already unlocked with a "Start" button, the following ones locked (🔒) until the mastery engine confirms 80% domain mastery on the previous topic — an unlock gate enforced server-side, not just decorative on screen.
 
 </td>
 <td valign="top">
 
-**Perfil.** XP total e streak consolidados, a certificação ativa (com opção de trocar entre as 3 clouds) e as preferências de estudo — onde entram lembretes e cadência da repetição espaçada. É o hub que fecha o loop de hábito iniciado na trilha.
+**Profile.** Total XP and streak consolidated, the active certification (with the option to switch between the 3 clouds), and study preferences — where reminders and spaced-repetition cadence live. It's the hub that closes the habit loop started on the track.
 
 </td>
 </tr>
 </table>
 
-*Prints de um build local (Flutter Web + API FastAPI local, SQLite, sem Supabase real) — ver [Rodando o backend localmente](#rodando-o-backend-localmente) pra reproduzir.*
+*Screenshots from a local build (Flutter Web + local FastAPI, SQLite, no real Supabase) — see [Running the backend locally](#running-the-backend-locally) to reproduce.*
 
 ---
 
-## Status atual (2026-08-09)
+## Current status (2026-08-09)
 
-| Etapa | Status |
+| Stage | Status |
 |---|---|
-| Ideia validada (potencial real, nicho defensável) | ✅ |
-| Pesquisa de mercado e concorrência | ✅ |
-| Spec de MVP fechado | ✅ |
-| Premissa arquitetural travada (agnóstico de provedor) | ✅ |
-| Requisitos funcionais e não funcionais (RF/RNF) | ✅ |
+| Idea validated (real potential, defensible niche) | ✅ |
+| Market and competitor research | ✅ |
+| MVP spec locked | ✅ |
+| Architectural premise locked (provider-agnostic) | ✅ |
+| Functional and non-functional requirements (FR/NFR) | ✅ |
 | System design (Flutter + FastAPI + Supabase, schema, endpoints) | ✅ |
-| Modelagem de domínio (entidades) | ✅ |
-| Motor do core loop (SRS + mastery + gate + XP/streak) | ✅ |
-| Repository (SQLAlchemy) + services + API FastAPI (5 endpoints) | ✅ |
-| Conteúdo real — GCP Professional Data Engineer | ⏳ próximo passo |
-| Conteúdo real — AWS Data Engineer – Associate | ⏳ não iniciado |
-| Conteúdo real — Azure Data Engineer Associate (DP-203) | ⏳ não iniciado |
-| Supabase real conectado (hoje roda em SQLite local) | ⏳ próximo passo |
-| Frontend Flutter | ✅ telas do core loop implementadas (dev target Linux); protótipo visual das 10 telas completo |
+| Domain modeling (entities) | ✅ |
+| Core loop engine (SRS + mastery + gate + XP/streak) | ✅ |
+| Repository (SQLAlchemy) + services + FastAPI API (5 endpoints) | ✅ |
+| Real content — GCP Professional Data Engineer | ⏳ next step |
+| Real content — AWS Data Engineer – Associate | ⏳ not started |
+| Real content — Azure Data Engineer Associate (DP-203) | ⏳ not started |
+| Real Supabase connected (currently runs on local SQLite) | ⏳ next step |
+| Flutter frontend | ✅ core loop screens implemented (dev target Linux); visual prototype of all 10 screens complete |
 
 ---
 
 ## Stack
 
-| Camada | Tecnologia | Papel |
+| Layer | Technology | Role |
 |---|---|---|
-| Frontend | Flutter (mobile-first, dev target web/Linux) | Trilha, sessões de estudo, perfil |
-| Backend | FastAPI + Pydantic | 5 endpoints do MVP, motor de regras exposto via API |
-| ORM / dados | SQLAlchemy | Repository pattern sobre SQLite (dev) / Postgres (prod) |
-| Auth + banco de produção | Supabase (Auth + Postgres) | Alvo de integração, ainda não conectado |
-| Motor do core loop | Python puro, sem I/O | SRS (SM-2 adaptado), mastery gate, XP/streak |
+| Frontend | Flutter (mobile-first, dev target web/Linux) | Track, study sessions, profile |
+| Backend | FastAPI + Pydantic | 5 MVP endpoints, rules engine exposed via API |
+| ORM / data | SQLAlchemy | Repository pattern over SQLite (dev) / Postgres (prod) |
+| Auth + production database | Supabase (Auth + Postgres) | Integration target, not yet connected |
+| Core loop engine | Pure Python, no I/O | SRS (adapted SM-2), mastery gate, XP/streak |
 
 ---
 
-## Contexto
+## Background
 
-Origem do projeto: o dono é engenheiro de dados, estuda para certificações Google Cloud, e sente que o material disponível é fragmentado, denso, em inglês e sem estrutura de hábito. Ideia: um app estilo Duolingo que gamifica esse estudo.
+Project origin: the owner is a data engineer studying for Google Cloud certifications, and feels the available material is fragmented, dense, in English, and lacks habit structure. Idea: a Duolingo-style app that gamifies that studying.
 
-Restrições de partida:
-- Desenvolvedor solo (side project)
-- Background forte em dados/backend, mais fraco em frontend/UX
-- Quer projeto "bem feito": system design + TDD, não só "shippar rápido"
-- Ambição inicial de MVP em ~1 mês (spec foi cortado agressivamente para caber nisso)
+Starting constraints:
+- Solo developer (side project)
+- Strong background in data/backend, weaker in frontend/UX
+- Wants a "properly built" project: system design + TDD, not just "ship fast"
+- Initial MVP ambition of ~1 month (spec was aggressively cut to fit)
 
 ---
 
-## Documentação
+## Documentation
 
-| Doc | O que tem |
+| Doc | What's in it |
 |---|---|
-| [`docs/market-research.md`](docs/market-research.md) | Tamanho de mercado, concorrentes (CloudLearn, Whizlabs, Tutorials Dojo), a ciência por trás do motor de repetição espaçada do Duolingo (HLR/SM-2/SuperMemo) |
-| [`docs/product-spec.md`](docs/product-spec.md) | Spec de MVP consolidado: problema, hipótese, escopo de conteúdo, core loop, o que fica de fora, métrica de sucesso |
-| [`docs/architecture-decisions.md`](docs/architecture-decisions.md) | Premissas arquiteturais travadas — modelagem 100% agnóstica de provedor/certificação |
-| [`docs/core-loop-srs.md`](docs/core-loop-srs.md) | Motor de mastery e repetição espaçada (SM-2 adaptado) — fórmulas e decisões fechadas |
-| [`docs/requirements.md`](docs/requirements.md) | Requisitos funcionais e não funcionais do MVP (RF/RNF) |
-| [`docs/system-design.md`](docs/system-design.md) | Stack, arquitetura, schema do banco, endpoints e plano de deploy do MVP |
+| [`docs/market-research.md`](docs/market-research.md) | Market size, competitors (CloudLearn, Whizlabs, Tutorials Dojo), the science behind Duolingo's spaced-repetition engine (HLR/SM-2/SuperMemo) |
+| [`docs/product-spec.md`](docs/product-spec.md) | Consolidated MVP spec: problem, hypothesis, content scope, core loop, what's out of scope, success metric |
+| [`docs/architecture-decisions.md`](docs/architecture-decisions.md) | Locked architectural premises — 100% provider/certification-agnostic modeling |
+| [`docs/core-loop-srs.md`](docs/core-loop-srs.md) | Mastery and spaced-repetition engine (adapted SM-2) — formulas and locked decisions |
+| [`docs/requirements.md`](docs/requirements.md) | MVP functional and non-functional requirements (FR/NFR) |
+| [`docs/system-design.md`](docs/system-design.md) | Stack, architecture, database schema, endpoints, and MVP deployment plan |
 
 ---
 
-## Rodando o backend localmente
+## Running the backend locally
 
 ```bash
 cd backend
-uv venv .venv && uv pip install -e ".[dev]"   # ou: python3 -m venv .venv && pip install -e ".[dev]"
+uv venv .venv && uv pip install -e ".[dev]"   # or: python3 -m venv .venv && pip install -e ".[dev]"
 
-.venv/bin/python -m pytest                     # roda a suíte (unit + integration)
-.venv/bin/uvicorn app.main:app --reload         # sobe a API em http://localhost:8000/docs
+.venv/bin/python -m pytest                     # run the suite (unit + integration)
+.venv/bin/uvicorn app.main:app --reload         # start the API at http://localhost:8000/docs
 ```
 
-Sem `DATABASE_URL`/`SUPABASE_JWT_SECRET` configurados (ver `backend/.env.example`), a API sobe contra um SQLite local (`backend/certfly.db`) e qualquer rota autenticada responde 500 — suficiente para rodar a suíte de testes e para desenvolvimento do motor/repository, mas não pra bater na API de verdade sem um projeto Supabase.
+Without `DATABASE_URL`/`SUPABASE_JWT_SECRET` set (see `backend/.env.example`), the API comes up against a local SQLite database (`backend/certfly.db`) and any authenticated route returns 500 — enough to run the test suite and develop the engine/repository, but not enough to hit the real API without a Supabase project.
 
-### Estrutura do backend
+### Backend structure
 
 ```
 backend/app/
-├── motor/       # regras de negócio puras (SRS, mastery, XP/streak) — sem I/O
-├── models/      # entidades de domínio (dataclasses) — app/models/entities.py
-├── repository/  # SQLAlchemy: orm_models.py (schema), db.py (sessão), + 1 módulo por agregado
-├── services/    # orquestra motor + repository pros 5 casos de uso do MVP
-├── routers/     # endpoints FastAPI + schemas Pydantic de request/response
-└── auth.py      # validação do JWT do Supabase Auth
+├── motor/       # pure business rules (SRS, mastery, XP/streak) — no I/O
+├── models/      # domain entities (dataclasses) — app/models/entities.py
+├── repository/  # SQLAlchemy: orm_models.py (schema), db.py (session), + 1 module per aggregate
+├── services/    # orchestrates engine + repository for the 5 MVP use cases
+├── routers/     # FastAPI endpoints + Pydantic request/response schemas
+└── auth.py      # Supabase Auth JWT validation
 ```
 
 ---
 
-## Roadmap imediato
+## Immediate roadmap
 
-1. Requisitos funcionais e não funcionais ✅
-2. Modelagem de domínio (entidades) ✅
+1. Functional and non-functional requirements ✅
+2. Domain modeling (entities) ✅
 3. System design (stack, schema, endpoints, deploy) ✅
-4. Motor completo + repository + services + API FastAPI ✅
-5. Frontend Flutter — telas do core loop implementadas; protótipo visual completo (10 telas) ✅
-6. Escrever conteúdo real — GCP Professional Data Engineer — próximo passo
-7. Escrever conteúdo real — AWS Data Engineer – Associate
-8. Escrever conteúdo real — Azure Data Engineer Associate (DP-203)
-9. Conectar a um projeto Supabase real (hoje só SQLite local)
+4. Full engine + repository + services + FastAPI API ✅
+5. Flutter frontend — core loop screens implemented; full visual prototype (10 screens) ✅
+6. Write real content — GCP Professional Data Engineer — next step
+7. Write real content — AWS Data Engineer – Associate
+8. Write real content — Azure Data Engineer Associate (DP-203)
+9. Connect a real Supabase project (currently local SQLite only)
 
-**Nota (2026-08-10):** o MVP passou a cobrir 3 certificações (1 por cloud) em vez de só GCP — ver `docs/product-spec.md`. Isso adia o lançamento (mais conteúdo pra escrever) em troca de uma proposta de valor mais forte.
+**Note (2026-08-10):** the MVP now covers 3 certifications (1 per cloud) instead of just GCP — see `docs/product-spec.md`. This delays launch (more content to write) in exchange for a stronger value proposition.
